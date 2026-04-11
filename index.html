@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animasi Music Player</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+</head>
+<body>
+
+    <div id="loading-overlay">
+        <div class="spinner"></div>
+        <p>Memuat Database...</p>
+    </div>
+
+    <div class="app-container">
+        
+        <div id="playlist-view" class="view-screen active">
+            <header class="header">
+                <span class="material-icons-round">menu</span>
+                <h1>Playlist</h1>
+                <span class="material-icons-round">search</span>
+            </header>
+            
+            <ul id="track-list" class="track-list">
+                </ul>
+        </div>
+
+        <div id="player-view" class="view-screen">
+            <header class="header transparent">
+                <span class="material-icons-round btn-icon" id="btn-back">expand_more</span>
+                <span class="material-icons-round btn-icon">more_vert</span>
+            </header>
+
+            <div class="album-container">
+                <div class="vinyl-record" id="vinyl-record">
+                    <div class="vinyl-center"></div>
+                </div>
+            </div>
+
+            <div class="player-info">
+                <h2 id="np-title">Judul Lagu</h2>
+                <p id="np-artist">Nama Penyanyi</p>
+                <span id="np-status" class="status-badge">Standby</span>
+            </div>
+
+            <div class="progress-container">
+                <div class="progress-bar" id="progress-bg">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+                <div class="time-row">
+                    <span id="time-current">0:00</span>
+                    <span id="time-total">--:--</span>
+                </div>
+            </div>
+
+            <div class="controls-row">
+                <span class="material-icons-round btn-icon">shuffle</span>
+                <span class="material-icons-round btn-icon btn-main" id="btn-prev">skip_previous</span>
+                <button class="btn-play-fab" id="btn-play">
+                    <span class="material-icons-round" id="play-icon">play_arrow</span>
+                </button>
+                <span class="material-icons-round btn-icon btn-main" id="btn-next">skip_next</span>
+                <span class="material-icons-round btn-icon">repeat</span>
+            </div>
+        </div>
+
+        <div id="mini-player" class="mini-player hidden">
+            <div class="mini-info">
+                <h4 id="mini-title">Judul Lagu</h4>
+                <p id="mini-status">Sedang diputar</p>
+            </div>
+            <button class="btn-mini-play" id="btn-mini-play">
+                <span class="material-icons-round" id="mini-play-icon">pause</span>
+            </button>
+        </div>
+
+    </div>
+
+    <audio id="audio-player" autoplay></audio>
+    <script src="script.js"></script>
+</body>
+</html>
