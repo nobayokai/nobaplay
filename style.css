@@ -1,0 +1,70 @@
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Roboto, sans-serif; -webkit-tap-highlight-color: transparent; }
+body { background-color: #e0e5ec; display: flex; justify-content: center; align-items: center; height: 100vh; height: 100dvh; overflow: hidden; }
+
+/* Wadah Aplikasi Utama */
+.app-container { width: 100%; max-width: 400px; height: 100%; background-color: #ffffff; position: relative; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+
+/* Pengaturan Layar (Geser Naik Turun) */
+.view-screen { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: #ffffff; transition: transform 0.5s cubic-bezier(0.86, 0, 0.07, 1); display: flex; flex-direction: column; }
+#playlist-view { transform: translateY(0); z-index: 1; }
+#player-view { transform: translateY(100%); z-index: 10; background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%); }
+/* Class untuk memunculkan layar player */
+.player-active #playlist-view { transform: translateY(-30%); opacity: 0.5; }
+.player-active #player-view { transform: translateY(0); }
+
+/* Header */
+.header { display: flex; justify-content: space-between; align-items: center; padding: 20px; color: #333; }
+.header h1 { font-size: 20px; font-weight: 600; }
+.transparent { background: transparent; }
+.btn-icon { cursor: pointer; color: #555; transition: 0.2s; }
+.btn-icon:hover { color: #ff4757; }
+
+/* Daftar Lagu */
+.track-list { list-style: none; overflow-y: auto; flex-grow: 1; padding: 0 20px 80px 20px; }
+.track-item { display: flex; align-items: center; padding: 15px 0; border-bottom: 1px solid #f1f2f6; cursor: pointer; }
+.track-item .thumb { width: 45px; height: 45px; border-radius: 50%; background: linear-gradient(135deg, #ff6b81, #ff4757); margin-right: 15px; display: flex; justify-content: center; align-items: center; color: white; font-weight: bold; }
+.track-item .info { flex-grow: 1; overflow: hidden; }
+.track-item h3 { font-size: 15px; color: #2f3542; margin-bottom: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.track-item p { font-size: 12px; color: #747d8c; }
+.track-item.playing h3 { color: #ff4757; }
+
+/* Animasi Piringan Hitam */
+.album-container { flex-grow: 1; display: flex; justify-content: center; align-items: center; }
+.vinyl-record { width: 260px; height: 260px; border-radius: 50%; background: radial-gradient(circle, #333 30%, #111 70%, #000 100%); box-shadow: 0 15px 35px rgba(0,0,0,0.3); display: flex; justify-content: center; align-items: center; position: relative; border: 4px solid #2f3542; }
+.vinyl-center { width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #ff6b81, #ff4757); border: 3px solid #2f3542; display: flex; justify-content: center; align-items: center; }
+.vinyl-center::after { content: ''; width: 15px; height: 15px; border-radius: 50%; background: #ffffff; }
+
+/* Class untuk mengaktifkan putaran */
+.spinning { animation: spin 4s linear infinite; }
+.paused { animation-play-state: paused; }
+@keyframes spin { 100% { transform: rotate(360deg); } }
+
+/* Info Pemutar */
+.player-info { text-align: center; padding: 0 30px; margin-bottom: 20px; }
+.player-info h2 { font-size: 24px; color: #2f3542; margin-bottom: 5px; }
+.player-info p { font-size: 14px; color: #747d8c; margin-bottom: 10px; }
+.status-badge { font-size: 11px; background: #f1f2f6; padding: 4px 10px; border-radius: 20px; color: #57606f; }
+
+/* Progress Bar */
+.progress-container { padding: 0 30px; margin-bottom: 30px; }
+.progress-bar { width: 100%; height: 6px; background: #dfe4ea; border-radius: 3px; position: relative; overflow: hidden; }
+.progress-fill { height: 100%; width: 0%; background: #ff4757; transition: width 0.1s linear; }
+.time-row { display: flex; justify-content: space-between; font-size: 12px; color: #a4b0be; margin-top: 8px; }
+
+/* Kontrol Bawah */
+.controls-row { display: flex; justify-content: space-around; align-items: center; padding: 0 30px 40px 30px; }
+.btn-main { font-size: 32px; color: #2f3542; }
+.btn-play-fab { width: 65px; height: 65px; border-radius: 50%; background: #ff4757; color: white; border: none; box-shadow: 0 10px 20px rgba(255, 71, 87, 0.4); display: flex; justify-content: center; align-items: center; cursor: pointer; transition: 0.2s; }
+.btn-play-fab:hover { transform: scale(1.05); }
+.btn-play-fab span { font-size: 36px; }
+
+/* Mini Player (Di layar Playlist) */
+.mini-player { position: absolute; bottom: 0; left: 0; width: 100%; background: #ffffff; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 -5px 15px rgba(0,0,0,0.05); z-index: 5; cursor: pointer; transition: 0.3s transform; border-top: 1px solid #f1f2f6; padding-bottom: env(safe-area-inset-bottom); }
+.mini-player.hidden { transform: translateY(100%); }
+.mini-info h4 { font-size: 14px; color: #2f3542; }
+.mini-info p { font-size: 12px; color: #ff4757; }
+.btn-mini-play { background: none; border: none; color: #2f3542; font-size: 30px; }
+
+/* Loading Screen */
+#loading-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #ffffff; z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #2f3542; }
+.spinner { border: 4px solid #f1f2f6; border-top: 4px solid #ff4757; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin-bottom: 15px; }
